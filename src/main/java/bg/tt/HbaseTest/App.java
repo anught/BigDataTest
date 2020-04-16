@@ -132,8 +132,17 @@ public class App {
 	
 	public void putMutiOk() throws IOException {	//	批量异步插入方式，效率更高
 		
-		BufferedMutatorParams mutatorParams = new BufferedMutatorParams(tn).writeBufferSize(1024*1024);//1Mb		
-		BufferedMutator table = conn.getBufferedMutator(mutatorParams);		
+		BufferedMutatorParams mutatorParams = new BufferedMutatorParams(tn)	;
+		
+		mutatorParams.writeBufferSize(1024*1024);//1Mb
+		
+//		mutatorParams.rpcTimeout(10);		
+//		mutatorParams.setWriteBufferPeriodicFlushTimeoutMs(100000);//设置自动刷新缓冲区之前的最大超时时间		
+//		mutatorParams.setWriteBufferPeriodicFlushTimerTickMs(100) ;//如果选中，则设置timer检查缓冲区超时的频率。
+		
+		BufferedMutator table = conn.getBufferedMutator(mutatorParams);	
+		
+		
 		Put put01 =new Put(Bytes.toBytes("row02"));//参数是行健
 		put01.addColumn(Bytes.toBytes("info"), Bytes.toBytes("col2"), Bytes.toBytes("value02"))
 		     .addColumn(Bytes.toBytes("info"), Bytes.toBytes("col3"), Bytes.toBytes("value03"));
