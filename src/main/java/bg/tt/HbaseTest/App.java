@@ -46,6 +46,7 @@ public class App {
 		    //1.获得配置文件对象
 		    Configuration conf=HBaseConfiguration.create();
 		    //设置配置参数
+		    
 		    conf.set("hbase.zookeeper.quorum", "192.168.175.101:2181");
 		    conf.set("hbase.rootdir", "hdfs://192.168.175.101/hbase");
 		    
@@ -136,7 +137,7 @@ public class App {
 		
 		mutatorParams.writeBufferSize(1024*1024);//1Mb
 		
-//		mutatorParams.rpcTimeout(10);		
+		mutatorParams.rpcTimeout(10*1000);		
 //		mutatorParams.setWriteBufferPeriodicFlushTimeoutMs(100000);//设置自动刷新缓冲区之前的最大超时时间		
 //		mutatorParams.setWriteBufferPeriodicFlushTimerTickMs(100) ;//如果选中，则设置timer检查缓冲区超时的频率。
 		
